@@ -1,0 +1,7 @@
+/* Стандартные поля элементов на очень большом экране 1025...*/
+@media screen and (min-width: 769px) {
+  .content__element_follow-grid_size-xl-standard {
+    max-width: calc(1280px - 2 * 200px);
+    width: calc(100% - 2 * 200px);
+  }
+}
