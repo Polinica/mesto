@@ -20,7 +20,7 @@
 /* Header */
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
-@import url(../blocks/header/__border/header__border.css);
+@import url(../blocks/border/border.css);
 
 /* Profile */
 @import url(../blocks/profile/profile.css);
