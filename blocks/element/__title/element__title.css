@@ -1,7 +1,7 @@
 .element__title {
   margin: 0; /* Сброс стандартных стилей */
   color: #000000;
-  height: 29px;
+  min-height: 29px;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;

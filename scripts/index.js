@@ -12,13 +12,12 @@ let profileEdit = document.querySelector(".profile__edit-btn"),
 function openToClick() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileSubtitle.textContent;
-  popupProfileEdit.classList.add("popup__opened");
-  console.log(popupProfileEdit);
+  popupProfileEdit.classList.add("popup_opened");
 }
 
 //Закрытие редактирования профиля
 function closeToClick() {
-  popupProfileEdit.classList.remove("popup__opened");
+  popupProfileEdit.classList.remove("popup_opened");
 }
 
 //сохраненить имя и текст

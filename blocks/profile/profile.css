@@ -16,7 +16,7 @@
   .profile {
     box-sizing: border-box;
     padding-top: 42px;
-    padding-bottom: 36px;
+    padding-bottom: 0;
     width: 100%;
   }
 }
