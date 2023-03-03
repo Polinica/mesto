@@ -1,0 +1,38 @@
+/* .popup__input {
+  border: 0; 
+  border-bottom: 1px solid #000000;
+  opacity: 0.2;
+  padding-bottom: 13px;
+  
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+} */
+
+/* Параметры шрифта внутри поля */
+
+.popup__input {
+  border: 0; /* Сброс стандартного стиля */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0 0 13px 0;
+  /* Параметры шрифта внутри поля */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  height: 14px;
+  color: #000000;
+  margin-bottom: 30px;
+  padding-bottom: 13px;
+}
+
+/* .popup__input::placeholder {
+  color: #c4c4c4;
+  font-weight: 400;
+} */
+
+/* .popup__input:focus {
+  outline-offset: 3px;
+} */

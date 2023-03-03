@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MESTO</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+    <meta name="MESTO" content="базовая функциональность" />
+    <meta name="keywords" content="Mesto: базовая функциональность" />
+    <meta name="author" content="Виктория Люсикова" />
+  </head>
+  <body class="page">
+    <div class="content">
+      <header class="header content__element">
+        <img
+          class="header__logo"
+          src="./images/Vector.svg"
+          alt="Место. Логотип проекта"
+        />
+      </header>
+      <main>
+        <!-- Profile -->
+        <section class="profile content__element">
+          <img
+            class="profile__avatar-image"
+            src="./images/image.svg"
+            alt="аватар пользователя"
+          />
+          <div class="profile__info">
+            <div class="profile__name">
+              <h1 id="user-name" class="profile__name-title">Жак-Ив Кусто</h1>
+              <button
+                class="profile__edit-btn"
+                type="button"
+                aria-label="Редактировать профиль"
+              ></button>
+            </div>
+            <p id="user-occupation" class="profile__subtitle">Исследователь</p>
+          </div>
+          <button
+            type="button"
+            class="profile__add-btn"
+            aria-label="Добавить фотографию"
+          ></button>
+        </section>
+        <!-- Elements -->
+        <section class="elements content__element" aria-label="Фотографии">
+          <div class="element">
+            <img src="./images/1.jpg" alt="Карачаевск" class="element__image" />
+            <div class="element__description">
+              <h2 class="element__title">Карачаевск</h2>
+              <button
+                type="button"
+                class="element__like-button"
+                aria-label="Нравится"
+              ></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/2.jpg" alt="Карачаевск" class="element__image" />
+            <div class="element__description">
+              <h2 class="element__title">Карачаевск-карачаевск</h2>
+              <button
+                type="button"
+                class="element__like-button"
+                aria-label="Нравится"
+              ></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/3.jpg" alt="Карачаевск" class="element__image" />
+            <div class="element__description">
+              <h2 class="element__title">Карачаевск</h2>
+              <button
+                type="button"
+                class="element__like-button"
+                aria-label="Нравится"
+              ></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/4.jpg" alt="Карачаевск" class="element__image" />
+            <div class="element__description">
+              <h2 class="element__title">Карачаевск</h2>
+              <button
+                type="button"
+                class="element__like-button"
+                aria-label="Нравится"
+              ></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/5.jpg" alt="Карачаевск" class="element__image" />
+            <div class="element__description">
+              <h2 class="element__title">Карачаевск</h2>
+              <button
+                type="button"
+                class="element__like-button"
+                aria-label="Нравится"
+              ></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/6.jpg" alt="Карачаевск" class="element__image" />
+            <div class="element__description">
+              <h2 class="element__title">Карачаевск</h2>
+              <button
+                type="button"
+                class="element__like-button"
+                aria-label="Нравится"
+              ></button>
+            </div>
+          </div>
+        </section>
+      </main>
+      <!-- Footer -->
+      <footer class="footer content__element">
+        <p class="footer__copyright">&copy;&nbsp;2023 Виктория Люсикова</p>
+      </footer>
+
+      <!-- popup реактировать профиль -->
+      <section class="popup popup_type_edit" id="popup_type_edit">
+        <div class="popup__container">
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <form class="popup__fields" name="popupFields">
+            <label class="popup__fields-field">
+              <input
+                id="name-input"
+                type="text"
+                placeholder="Имя"
+                class="popup__input popup__input_text_name"
+                name="name"
+                minlength="2"
+                maxlength="39"
+                required
+              />
+            </label>
+            <label class="popup__fields-field">
+              <input
+                id="occupation-input"
+                type="text"
+                placeholder="О себе"
+                class="popup__input popup__input_text_job"
+                name="occupation"
+                minlength="2"
+                maxlength="400"
+                required
+              />
+            </label>
+            <button class="popup__submit-btn" type="submit">Сохранить</button>
+          </form>
+          <button
+            id="popup__close-button"
+            class="popup__close"
+            type="button"
+            aria-label="Закрыть окно"
+          ></button>
+        </div>
+      </section>
+    </div>
+    <script src="./scripts/index.js"></script>
+  </body>
+</html>
