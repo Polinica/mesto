@@ -1,6 +1,0 @@
-/* Стандартные поля элементов на экране телефона 320...425 */
-@media screen and (max-width: 768px) {
-  .content__element_follow-grid_size-s {
-    width: calc(100% - 2 * 27px);
-  }
-}
