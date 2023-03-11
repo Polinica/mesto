@@ -47,16 +47,18 @@ function getNewCard(name, link) {
 
   return card;
 }
+//________________________________________________________________________________________
 
 // POPUP
 let profileEdit = document.querySelector(".profile__edit-btn"),
   profileName = document.querySelector(".profile__name-title"),
   profileSubtitle = document.querySelector(".profile__subtitle"),
-  popupProfileEdit = document.querySelector(".popup"),
+  // popup_type_edit
+  popupProfileEdit = document.querySelector(".popup_type_edit"),
   closeInput = popupProfileEdit.querySelector(".popup__close"),
   nameInput = popupProfileEdit.querySelector(".popup__input_text_name"),
   jobInput = popupProfileEdit.querySelector(".popup__input_text_job"),
-  form = popupProfileEdit.querySelector(".popup__fields");
+  formEdit = popupProfileEdit.querySelector(".popup__form_edit");
 
 // Кнопка редактировать профиль
 function openToClick() {
@@ -70,7 +72,7 @@ function closeToClick() {
   popupProfileEdit.classList.remove("popup_opened");
 }
 
-//сохраненить имя и текст
+//сохраннить имя и текст
 function handleFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -78,7 +80,7 @@ function handleFormSubmit(evt) {
   closeToClick();
 }
 
-form.addEventListener("submit", handleFormSubmit);
+formEdit.addEventListener("submit", handleFormSubmit);
 profileEdit.addEventListener("click", openToClick);
 closeInput.addEventListener("click", closeToClick);
 
