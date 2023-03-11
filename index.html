@@ -167,6 +167,44 @@
           ></button>
         </div>
       </section>
+
+      <!-- popup добавление карточек -->
+      <section class="popup popup_type_add-card">
+        <div class="popup__container">
+          <h3 class="popup__title">Новое место</h3>
+          <form class="popup__fields" name="popupFields">
+            <label class="popup__fields-field">
+              <input
+                id="card-name-input"
+                type="text"
+                placeholder="Название"
+                class="popup__input popup__input_add-card_name"
+                name="name"
+                minlength="2"
+                maxlength="32"
+                required
+              />
+            </label>
+            <label class="popup__fields-field">
+              <input
+                id="image-input"
+                type="url"
+                placeholder="Ссылка на картинку"
+                class="popup__input popup__input_add-card_link"
+                name="image"
+                required
+              />
+            </label>
+            <button class="popup__submit-btn" type="submit">Создать</button>
+          </form>
+          <button
+            id="popup__close-button"
+            class="popup__close"
+            type="button"
+            aria-label="Закрыть окно"
+          ></button>
+        </div>
+      </section>
     </div>
     <script src="./scripts/index.js"></script>
   </body>
