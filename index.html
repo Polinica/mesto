@@ -45,82 +45,28 @@
             aria-label="Добавить фотографию"
           ></button>
         </section>
+        
         <!-- Elements -->
         <section class="elements content__element" aria-label="Фотографии">
-          <div class="element">
-            <img
-              src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-              alt="Архыз"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__title">Архыз</h2>
+          <!--  6 карточек, которые добавит JavaScript -->
+          <template id="element">
+            <div class="element">
+              <img src="#" alt="#" class="element__image" />
+              <div class="element__description">
+                <h2 class="element__title">#</h2>
+                <button
+                  type="button"
+                  class="element__like-button"
+                  aria-label="Нравится"
+                ></button>
+              </div>
               <button
                 type="button"
-                class="element__like-button"
-                aria-label="Нравится"
+                class="card__delete-button"
+                aria-label="Удалить"
               ></button>
             </div>
-          </div>
-          <div class="element">
-            <img src="./images/2.jpg" alt="Карачаевск" class="element__image" />
-            <div class="element__description">
-              <h2 class="element__title">Карачаевск-карачаевск</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
-              alt="Челябинская область"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__title">Челябинская область</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/4.jpg" alt="Карачаевск" class="element__image" />
-            <div class="element__description">
-              <h2 class="element__title">Карачаевск</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/5.jpg" alt="Карачаевск" class="element__image" />
-            <div class="element__description">
-              <h2 class="element__title">Карачаевск</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/6.jpg" alt="Карачаевск" class="element__image" />
-            <div class="element__description">
-              <h2 class="element__title">Карачаевск</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
+          </template>
         </section>
       </main>
       <!-- Footer -->
@@ -169,7 +115,7 @@
       </section>
 
       <!-- popup добавление карточек -->
-      <section class="popup popup_type_add-card">
+      <!-- <section class="popup popup_type_add-card">
         <div class="popup__container">
           <h3 class="popup__title">Новое место</h3>
           <form class="popup__fields" name="popupFields">
@@ -204,7 +150,7 @@
             aria-label="Закрыть окно"
           ></button>
         </div>
-      </section>
+      </section> -->
     </div>
     <script src="./scripts/index.js"></script>
   </body>
