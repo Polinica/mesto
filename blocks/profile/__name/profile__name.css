@@ -1,19 +1,25 @@
 .profile__name {
-  display: flex;
-  gap: 18px;
-  align-items: baseline; /* Выравнивание кнопке редактирования по строке текста */
+  margin: 0; /* Сброс стандартных стилей */
+  /* Параметры шрифта */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 56px;
+  /* Запрет переноса и переполнения текста */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
+
 @media screen and (max-width: 768px) {
   .profile__name {
-    /* Отступ слева для компенсации кнопки справа при выравинвании по центру */
-    padding-left: calc(24px + 18px);
+    text-align: center;
   }
 }
 
 @media screen and (max-width: 425px) {
   .profile__name {
-    /* Отступ слева для компенсации кнопки справа при выравинвании по центру */
-    padding-left: calc(18px + 10px);
-    gap: 10px;
+    font-size: 27px;
+    line-height: 33px;
   }
 }

@@ -1,173 +1,160 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MESTO</title>
+    <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css" />
-
     <meta name="MESTO" content="базовая функциональность" />
     <meta name="keywords" content="Mesto: базовая функциональность" />
     <meta name="author" content="Виктория Люсикова" />
   </head>
   <body class="page">
     <div class="content">
+      <!-- Header -->
       <header class="header content__element">
         <img
-          class="header__logo"
           src="./images/Vector.svg"
           alt="Место. Логотип проекта"
+          class="header__logo"
         />
       </header>
+
       <main>
         <!-- Profile -->
         <section class="profile content__element">
           <img
-            class="profile__avatar-image"
             src="./images/image.svg"
-            alt="аватар пользователя"
+            alt="Фотография пользователя"
+            class="profile__avatar-image"
           />
           <div class="profile__info">
-            <div class="profile__name">
-              <h1 id="user-name" class="profile__name-title">Жак-Ив Кусто</h1>
+            <div class="profile__name-block">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
               <button
-                class="profile__edit-btn"
                 type="button"
+                class="profile__button profile__button_type_edit"
                 aria-label="Редактировать профиль"
               ></button>
             </div>
-            <p id="user-occupation" class="profile__subtitle">Исследователь</p>
+            <p class="profile__job">Исследователь</p>
           </div>
           <button
             type="button"
-            class="profile__add-btn"
+            class="profile__button profile__button_type_add"
             aria-label="Добавить фотографию"
           ></button>
         </section>
+
         <!-- Elements -->
-        <section class="elements content__element" aria-label="Фотографии">
-          <div class="element">
-            <img
-              src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-              alt="Архыз"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__title">Архыз</h2>
+        <section class="cards content__element" aria-label="Фотографии">
+          <!--  6 карточек, которые добавит JavaScript -->
+          <template id="card">
+            <div class="card">
+              <img src="#" alt="#" class="card__image" />
+              <div class="card__description">
+                <h2 class="card__title">#</h2>
+                <button
+                  type="button"
+                  class="card__like-button"
+                  aria-label="Добавить в избранное"
+                ></button>
+              </div>
               <button
                 type="button"
-                class="element__like-button"
-                aria-label="Нравится"
+                class="card__delete-button"
+                aria-label="Удалить"
               ></button>
             </div>
-          </div>
-          <div class="element">
-            <img src="./images/2.jpg" alt="Карачаевск" class="element__image" />
-            <div class="element__description">
-              <h2 class="element__title">Карачаевск-карачаевск</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
-              alt="Челябинская область"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__title">Челябинская область</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/4.jpg" alt="Карачаевск" class="element__image" />
-            <div class="element__description">
-              <h2 class="element__title">Карачаевск</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/5.jpg" alt="Карачаевск" class="element__image" />
-            <div class="element__description">
-              <h2 class="element__title">Карачаевск</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/6.jpg" alt="Карачаевск" class="element__image" />
-            <div class="element__description">
-              <h2 class="element__title">Карачаевск</h2>
-              <button
-                type="button"
-                class="element__like-button"
-                aria-label="Нравится"
-              ></button>
-            </div>
-          </div>
+          </template>
         </section>
       </main>
+
       <!-- Footer -->
       <footer class="footer content__element">
         <p class="footer__copyright">&copy;&nbsp;2023 Виктория Люсикова</p>
       </footer>
 
-      <!-- popup реактировать профиль -->
-      <section class="popup popup_type_edit" id="popup_type_edit">
+      <!-- Popups -->
+
+      <!-- Popup: редактировать профиль -->
+      <div class="popup popup_type_edit-profile">
         <div class="popup__container">
-          <h3 class="popup__title">Редактировать профиль</h3>
-          <form class="popup__fields" name="popupFields">
-            <label class="popup__fields-field">
-              <input
-                id="name-input"
-                type="text"
-                placeholder="Имя"
-                class="popup__input popup__input_text_name"
-                name="name"
-                minlength="2"
-                maxlength="39"
-                required
-              />
-            </label>
-            <label class="popup__fields-field">
-              <input
-                id="occupation-input"
-                type="text"
-                placeholder="О себе"
-                class="popup__input popup__input_text_job"
-                name="occupation"
-                minlength="2"
-                maxlength="400"
-                required
-              />
-            </label>
-            <button class="popup__submit-btn" type="submit">Сохранить</button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__form" name="popupForm">
+            <input
+              id="name-input"
+              type="text"
+              class="popup__input popup__input_type_name"
+              placeholder="Имя"
+              name="name"
+              minlength="2"
+              maxlength="39"
+              required
+            />
+            <input
+              id="occupation-input"
+              type="text"
+              class="popup__input popup__input_type_job"
+              placeholder="Профессия"
+              name="occupation"
+              minlength="2"
+              maxlength="400"
+              required
+            />
+            <button class="popup__save-button" type="submit">Сохранить</button>
           </form>
           <button
-            id="popup__close-button"
-            class="popup__close"
+            class="popup__cancel-button"
             type="button"
             aria-label="Закрыть окно"
           ></button>
         </div>
-      </section>
+      </div>
+
+      <!-- Popup: Новое место -->
+      <div class="popup popup_type_add-card">
+        <div class="popup__container">
+          <h2 class="popup__title">Новое место</h2>
+          <form class="popup__form" name="popupForm">
+            <input
+              type="text"
+              class="popup__input popup__input_type_title"
+              placeholder="Название"
+              name="title"
+              required
+            />
+            <input
+              type="url"
+              class="popup__input popup__input_type_link"
+              placeholder="Ссылка на картинку"
+              name="link"
+              required
+            />
+            <button class="popup__save-button" type="submit">Создать</button>
+          </form>
+          <button
+            class="popup__cancel-button"
+            type="button"
+            aria-label="Закрыть окно"
+          ></button>
+        </div>
+      </div>
+
+      <!-- Popup: Увеличенное изображение -->
+      <div class="popup popup_type_image">
+        <figure class="popup__image-container">
+          <img src="#" alt="#" class="popup__image" />
+          <figcaption class="popup__image-caption">#</figcaption>
+          <button
+            class="popup__cancel-button"
+            type="button"
+            aria-label="Закрыть окно"
+          ></button>
+        </figure>
+      </div>
     </div>
+    <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

@@ -2,14 +2,13 @@
 @import url(../vendor/normalize.css);
 
 /* Шрифт Inter*/
-@import url(../fonts/Inter-Web/fonts.css);
+@import url(../vendor/fonts/inter-web/inter.css);
 
-/* Общий блок для всей страницы page */
+/* Блок Page */
 @import url(../blocks/page/page.css);
 
-/* content */
+/* Контейнер страницы */
 @import url(../blocks/content/content.css);
-@import url(../blocks/content/__main-section/content__main-section.css);
 @import url(../blocks/content/__element/content__element.css);
 
 /* Header */
@@ -20,35 +19,39 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar-image/profile__avatar-image.css);
 @import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__name-block/profile__name-block.css);
 @import url(../blocks/profile/__name/profile__name.css);
-@import url(../blocks/profile/__name-title/profile__name-title.css);
-@import url(../blocks/profile/__edit-btn/profile__edit-btn.css);
-@import url(../blocks/profile/__subtitle/profile__subtitle.css);
-@import url(../blocks/profile/__add-btn/profile__add-btn.css);
+@import url(../blocks/profile/__button/profile__button.css);
+@import url(../blocks/profile/__button/_type/profile__button_type_edit.css);
+@import url(../blocks/profile/__button/_type/profile__button_type_add.css);
+@import url(../blocks/profile/__job/profile__job.css);
 
-/* elements */
-@import url(../blocks/elements/elements.css);
+/* Cards */
+@import url(../blocks/cards/cards.css);
 
-/* element */
-@import url(../blocks/element/element.css);
-@import url(../blocks/element/__image/element__image.css);
-@import url(../blocks/element/__description/element__description.css);
-@import url(../blocks/element/__title/element__title.css);
-@import url(../blocks/element/__like-button/element__like-button.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__description/card__description.css);
+@import url(../blocks/card/__title/card__title.css);
+@import url(../blocks/card/__like-button/card__like-button.css);
+@import url(../blocks/card/__like-button/_active/card__like-button_active.css);
+@import url(../blocks/card/__delete-button/card__detele-button.css);
 
-/* footer */
+/* Footer */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
+/* Popup */
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__title/popup__title.css);
-@import url(../blocks/popup/__fields/popup__fields.css);
+@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__input/_text/popup__input_text_name.css);
-@import url(../blocks/popup/__input/_text/popup__input_text_job.css);
-@import url(../blocks/popup/__fields-field/popup__fields-field.css);
-@import url(../blocks/popup/__submit-btn/popup__submit-btn.css);
-@import url(../blocks/popup/__close/popup__close.css);
-@import url(../blocks/popup/_type/popup_type_edit.css);
-@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__cancel-button/popup__cancel-button.css);
+@import url(../blocks/popup/__save-button/popup__save-button.css);
+
+@import url(../blocks/popup/_type/popup_type_image.css);
+@import url(../blocks/popup/__image-container/popup__image-container.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__image-caption/popup__image-caption.css);
