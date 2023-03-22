@@ -92,14 +92,23 @@ function openPopup(popup) {
 // }
 
 function closePopup(popup) {
+  const submitButtonElement = popup.querySelector(".popup__save-button");
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupByKey);
+  if (submitButtonElement) {
+    submitButtonElement.classList.add("popup__save-button_disabled");
+    submitButtonElement.disabled = true;
+  }
 }
 
 /** Обработчик для закрытия попапов по кнопке Esc */
 function closePopupByKey(evt) {
-  const popup = document.querySelector(".popup_opened");
-  if (evt.key === "Escape") closePopup(popup);
+  // const popup = document.querySelector(".popup_opened");
+  // if (evt.key === "Escape") closePopup(popup);
+  if (evt.key === "Escape") {
+    const popup = document.querySelector(".popup_opened");
+    closePopup(popup);
+  }
 }
 
 /** Функция сохраняет введенные данные и закрывает попап */
