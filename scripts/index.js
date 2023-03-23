@@ -92,13 +92,13 @@ function openPopup(popup) {
 // }
 
 function closePopup(popup) {
-  const submitButtonElement = popup.querySelector(".popup__save-button");
+  // const submitButtonElement = popup.querySelector(".popup__save-button");
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupByKey);
-  if (submitButtonElement) {
-    submitButtonElement.classList.add("popup__save-button_disabled");
-    submitButtonElement.disabled = true;
-  }
+  // if (submitButtonElement) {
+  //   submitButtonElement.classList.add("popup__save-button_disabled");
+  //   submitButtonElement.disabled = true;
+  // }
 }
 
 /** Обработчик для закрытия попапов по кнопке Esc */
@@ -119,6 +119,12 @@ function saveProfileInfo(event) {
   closePopup(profileEditPopup);
 }
 
+const setDisabledOnSubmitButton = (evt) => {
+  const submitButtonElement = evt.target.querySelector(".popup__save-button");
+  submitButtonElement.classList.add("popup__save-button_disabled");
+  submitButtonElement.disabled = true;
+};
+
 /** Функция сохраняет введенные данные и закрывает попап */
 function saveNewCard(event) {
   event.preventDefault();
@@ -127,10 +133,11 @@ function saveNewCard(event) {
     name: newCardTitle.value,
     link: newCardLink.value,
   };
-
   renderCards(cardsContainer, card);
+
+  //newCardForm.reset();
+  setDisabledOnSubmitButton(event);
   closePopup(newCardPopup);
-  newCardForm.reset();
 }
 
 /** Функция открывает попап с увеличенной картинкой */
@@ -140,7 +147,6 @@ function showImagePopup(event) {
   imagePopupCaption.textContent = event.target
     .closest(".card")
     .querySelector(".card__title").textContent;
-
   openPopup(imagePopup);
 }
 
