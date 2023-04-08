@@ -135,7 +135,7 @@ function saveNewCard(event) {
   };
   renderCards(cardsContainer, card);
 
-  //newCardForm.reset();
+  newCardForm.reset();
   setDisabledOnSubmitButton(event);
   closePopup(newCardPopup);
 }
