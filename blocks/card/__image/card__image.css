@@ -5,6 +5,7 @@
   object-position: center;
   /* background-color: #111; */
   transition: opacity 0.3s;
+  cursor: pointer;
 }
 
 .card__image:hover {
