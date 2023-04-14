@@ -34,6 +34,8 @@ const popupCloseButtons = document.querySelectorAll(".popup__cancel-button");
 
 const popups = document.querySelectorAll(".popup");
 
+const formValidators = {}; // Экземпляры класса FormValidator, чтобы снаружи обращаться к их методам
+
 /** Функция открывает нужный попап */
 export function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -73,11 +75,11 @@ function saveProfileInfo(event) {
   closePopup(profileEditPopup);
 }
 
-const setDisabledOnSubmitButton = (evt) => {
-  const submitButtonElement = evt.target.querySelector(".popup__save-button");
-  submitButtonElement.classList.add("popup__save-button_disabled");
-  submitButtonElement.disabled = true;
-};
+// const setDisabledOnSubmitButton = (evt) => {
+//   const submitButtonElement = evt.target.querySelector(".popup__save-button");
+//   submitButtonElement.classList.add("popup__save-button_disabled");
+//   submitButtonElement.disabled = true;
+// };
 
 /** Функция сохраняет введенные данные и закрывает попап */
 function saveNewCard(event) {
@@ -88,10 +90,9 @@ function saveNewCard(event) {
     link: newCardLink.value,
   };
   renderCards(cardsContainer, card);
-
   newCardForm.reset();
-  setDisabledOnSubmitButton(event);
   closePopup(newCardPopup);
+  formValidators[newCardForm.name].disableButtonState();
 }
 
 /** Обработчки событий */
@@ -138,9 +139,15 @@ popups.forEach((popup) => {
  */
 function renderCards(container, ...cards) {
   cards.forEach((cardData) => {
-    const card = new Card(cardData, "#card");
-    container.prepend(card.generateCard());
+    //const card = new Card(cardData, "#card");
+    container.prepend(generateCard(cardData));
   });
+}
+
+/** Функция создает новый элемент карточки по ее содержанию */
+function generateCard(cardData) {
+  const card = new Card(cardData, "#card");
+  return card.generateCard();
 }
 
 /** Отобразить исходные карточки при загрузке страницы */
@@ -153,6 +160,7 @@ function validateForms(formClasses) {
   );
   formElements.forEach((formElement) => {
     const form = new FormValidator(formClasses, formElement);
+    formValidators[formElement.getAttribute("name")] = form;
     form.enableValidation();
   });
 }
