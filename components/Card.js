@@ -1,15 +1,18 @@
-import {
-  imagePopup,
-  imagePopupFigure,
-  imagePopupCaption,
-  openPopup,
-} from "./index.js";
-
 export default class Card {
-  constructor(cardData, templateSelector) {
-    this._name = cardData.name;
-    this._link = cardData.link;
+  /**
+   * Класс отвечает за создание карточки
+   *
+   * Параметры:
+   * name - отображаемый заголовок карточки
+   * link - ссылка на изображение
+   * templateSelector - селектор template-элемента с шаблоном карточки
+   * handleCardClick - обработчик нажатия на изображение карточки
+   */
+  constructor({ name, link }, templateSelector, handleCardClick) {
+    this._name = name;
+    this._link = link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -37,21 +40,16 @@ export default class Card {
 
   _setEventlisteners() {
     this._element
-      .querySelector(".card__image")
-      .addEventListener("click", () => this._showImagePopup());
-    this._element
       .querySelector(".card__like-button")
       .addEventListener("click", this._likeCard);
     this._element
       .querySelector(".card__delete-button")
       .addEventListener("click", () => this._deleteCard());
-  }
-
-  _showImagePopup() {
-    imagePopupFigure.src = this._link;
-    imagePopupFigure.alt = this._name;
-    imagePopupCaption.textContent = this._name;
-    openPopup(imagePopup);
+    this._element
+      .querySelector(".card__image")
+      .addEventListener("click", () =>
+        this._handleCardClick(this._link, this._name)
+      );
   }
 
   _likeCard(event) {
