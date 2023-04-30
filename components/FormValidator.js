@@ -1,4 +1,19 @@
 export default class FormValidator {
+    /**
+   * Класс отвечает за валидацию формы, отображение/скрытие ошибок, отображение кнопки отправки
+   *
+   * Параметры:
+   * formClasses - селекторы и классы элементов формы, формат:
+   * {
+   *   formSelector,
+   *   inputSelector,
+   *   submitButtonSelector,
+   *   inactiveButtonClass,
+   *   inputErrorClass,
+   *   errorClass
+   * }
+   * formElement - элемент с валидируемой формой
+   */
   constructor(formClasses, formElement) {
     // Форма
     this._formElement = formElement;

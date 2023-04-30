@@ -1,54 +1,18 @@
-export const cardsSelector = ".cards";
-export const cardTemplateSelector = "#card";
-
-/** Элементы страницы */
-export const profileName = document.querySelector(".profile__name");
-export const profileJob = document.querySelector(".profile__job");
-export const profileEditButton = document.querySelector(
-  ".profile__button_type_edit"
-);
-
-export const profileEditPopupElement = document.querySelector(
-  ".popup_type_edit-profile"
-);
-export const newCardPopupElement = document.querySelector(
-  ".popup_type_add-card"
-);
-//export const profileEditForm = profileEditPopup.querySelector(".popup__form");
-export const profileNameInput = profileEditPopupElement.querySelector(
-  ".popup__input_type_name"
-);
-export const profileJobInput = profileEditPopupElement.querySelector(
-  ".popup__input_type_job"
-);
-export const profileEditPopupSelector = ".popup_type_edit-profile";
-
-export const newCardButton = document.querySelector(
-  ".profile__button_type_add"
-);
-export const newCardPopupSelector = ".popup_type_add-card";
-export const newCardForm = newCardPopupElement.querySelector(".popup__form");
-//export const newCardTitle = newCardPopup.querySelector(
-//  ".popup__input_type_title"
-//);
-// export const newCardLink = newCardPopup.querySelector(
-//   ".popup__input_type_link"
-// );
-
-export const imagePopupSelector = ".popup_type_image";
-// export const imagePopupFigure = imagePopup.querySelector(".popup__image");
-// export const imagePopupCaption = imagePopup.querySelector(
-//   ".popup__image-caption"
-// );
-
-// export const popupCloseButtons = document.querySelectorAll(
-//   ".popup__cancel-button"
-// );
-
-// export const popups = document.querySelectorAll(".popup");
-
 // Импорт данных из других модулей
-import {} from "../utils/constants.js";
+import {
+  cardsSelector,
+  cardTemplateSelector,
+  profileName,
+  profileJob,
+  profileEditButton,
+  profileNameInput,
+  profileJobInput,
+  profileEditPopupSelector,
+  newCardButton,
+  newCardForm,
+  newCardPopupSelector,
+  imagePopupSelector,
+} from "../utils/constants.js";
 import initialCards from "../utils/initialCards.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
