@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" />
+    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
     <meta name="MESTO" content="базовая функциональность" />
     <meta name="keywords" content="Mesto: базовая функциональность" />
     <meta name="author" content="Виктория Люсикова" />
@@ -14,7 +14,7 @@
       <!-- Header -->
       <header class="header content__element">
         <img
-          src="./images/Vector.svg"
+          src="<%=require('./images/Vector.svg')%>"
           alt="Место. Логотип проекта"
           class="header__logo"
         />
@@ -24,7 +24,7 @@
         <!-- Profile -->
         <section class="profile content__element">
           <img
-            src="./images/image.svg"
+            src="<%=require('./images/image.svg')%>"
             alt="Фотография пользователя"
             class="profile__avatar-image"
           />
