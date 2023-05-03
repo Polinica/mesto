@@ -25,6 +25,7 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._buttonLike = this._element.querySelector(".card__like-button");
 
     // Заполнение содержимого
     const image = this._element.querySelector(".card__image");
@@ -39,9 +40,9 @@ export default class Card {
   }
 
   _setEventlisteners() {
-    this._element
-      .querySelector(".card__like-button")
-      .addEventListener("click", this._likeCard);
+    this._buttonLike.addEventListener("click", (evt) => {
+      this._likeCard();
+    });
     this._element
       .querySelector(".card__delete-button")
       .addEventListener("click", () => this._deleteCard());
@@ -52,8 +53,8 @@ export default class Card {
       );
   }
 
-  _likeCard(event) {
-    event.target.classList.toggle("card__like-button_active");
+  _likeCard(evt) {
+    this._buttonLike.classList.toggle("card__like-button_active");
   }
 
   _deleteCard() {
