@@ -7,13 +7,16 @@ export default class PopupWithImage extends Popup {
    * Параметры:
    * popupSelector - селектор элемента с попапом
    */
-  open(imageLink, text) {
-    const figure = this._popup.querySelector(".popup__image");
-    const caption = this._popup.querySelector(".popup__image-caption");
+  constructor(popupSelector) {
+    super(popupSelector);
+    this._figureElement = this._popup.querySelector(".popup__image");
+    this._captionElement = this._popup.querySelector(".popup__image-caption");
+  }
 
-    figure.src = imageLink;
-    figure.alt = text;
-    caption.textContent = text;
+  open(imageLink, text) {
+    this._figureElement.src = imageLink;
+    this._figureElement.alt = text;
+    this._captionElement.textContent = text;
 
     super.open();
   }

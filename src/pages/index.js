@@ -22,6 +22,11 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import "./index.css"; // импорт css-стилей для сборки в Webpack
 
+function createCard(data) {
+  const card = new Card(data, cardTemplateSelector, handleCardClick);
+  return card.generateCard();
+}
+
 // Инициализация Section, добавление исходных карточек
 
 function handleCardClick(imageLink, text) {
@@ -32,10 +37,7 @@ function handleCardClick(imageLink, text) {
 const cardsSection = new Section(
   {
     items: initialCards,
-    renderer: (data) => {
-      const card = new Card(data, cardTemplateSelector, handleCardClick);
-      return card.generateCard();
-    },
+    renderer: createCard,
   },
   cardsSelector
 );
@@ -65,8 +67,7 @@ profileEditButton.addEventListener("click", function () {
 
 // Инициализация Popup с добавлением новой карточки
 const newCardPopup = new PopupWithForm(newCardPopupSelector, (data) => {
-  const card = new Card(data, cardTemplateSelector, handleCardClick);
-  cardsSection.addItem(card.generateCard());
+  cardsSection.addItem(createCard(data));
   newCardPopup.close();
   formValidators[newCardForm.getAttribute("name")].disableButtonState();
 });
