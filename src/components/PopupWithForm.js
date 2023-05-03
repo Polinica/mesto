@@ -1,7 +1,7 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-    /**
+  /**
    * Класс отвечает за работу с попапом, содержащим форму
    *
    * Параметры:
@@ -13,6 +13,7 @@ export default class PopupWithForm extends Popup {
     this._handleSubmit = handleSubmit;
     this._form = this._popup.querySelector(".popup__form");
     this._inputValues = {};
+    this._inputList = this._form.querySelectorAll('.popup__input');
   }
 
   _getInputValues() {
@@ -22,7 +23,13 @@ export default class PopupWithForm extends Popup {
     return this._inputValues;
   }
 
-
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      if (data[input.name]) {
+        input.value = data[input.name];
+      }
+    });
+  }
 
   setEventListeners() {
     super.setEventListeners();

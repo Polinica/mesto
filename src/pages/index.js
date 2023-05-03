@@ -57,11 +57,18 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
 profileEditPopup.setEventListeners();
 
 /** Обработчки событий */
+// profileEditButton.addEventListener("click", function () {
+//   ({ name: profileNameInput.value, job: profileJobInput.value } =
+//     userInfo.getUserInfo());
+//   profileNameInput.dispatchEvent(new Event("input"));
+//   profileJobInput.dispatchEvent(new Event("input"));
+//   profileEditPopup.open();
+// });
+
 profileEditButton.addEventListener("click", function () {
   ({ name: profileNameInput.value, job: profileJobInput.value } =
     userInfo.getUserInfo());
-  profileNameInput.dispatchEvent(new Event("input"));
-  profileJobInput.dispatchEvent(new Event("input"));
+  profileEditPopup.setInputValues(userInfo.getUserInfo());
   profileEditPopup.open();
 });
 
