@@ -27,7 +27,6 @@
             src="#"
             alt="Фотография пользователя"
             class="profile__avatar-image"
-            
           />
           <div class="profile__info">
             <div class="profile__name-block">
@@ -55,11 +54,14 @@
               <img src="#" alt="#" class="card__image" />
               <div class="card__description">
                 <h2 class="card__title">#</h2>
-                <button
-                  type="button"
-                  class="card__like-button"
-                  aria-label="Добавить в избранное"
-                ></button>
+                <div class="card__like">
+                  <button
+                    type="button"
+                    class="card__like-button"
+                    aria-label="Добавить в избранное"
+                  ></button>
+                  <span class="card__like-count"></span>
+                </div>
               </div>
               <button
                 type="button"

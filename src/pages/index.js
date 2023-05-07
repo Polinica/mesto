@@ -103,9 +103,11 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
 
 // Инициализация Popup с добавлением новой карточки
 const newCardPopup = new PopupWithForm(newCardPopupSelector, (data) => {
-  cardsSection.addItem(createCard(data));
-  newCardPopup.close();
-  formValidators[newCardForm.getAttribute("name")].disableButtonState();
+  api.addNewCard(data).then((res) => {
+    cardsSection.addItem(createCard(data), true);
+    newCardPopup.close();
+    formValidators[newCardForm.getAttribute("name")].disableButtonState();
+  });
 });
 
 // Инициализация Popup с увеличенным изображением
