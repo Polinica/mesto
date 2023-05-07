@@ -24,6 +24,8 @@ export default class UserInfo {
     this._jobElement.textContent = job;
   }
 
+
+  
   fill({ name, about, avatar, cohort, _id }) {
     this._name = name;
     this._job = about;
