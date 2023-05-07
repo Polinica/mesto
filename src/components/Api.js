@@ -12,7 +12,6 @@ export default class Api {
     return fetch(url, {
       method: "GET",
       headers: this._headers,
-      
     })
       .then((res) => {
         if (res.ok) return res.json();
@@ -38,7 +37,6 @@ export default class Api {
   setUserInfo({ name, job }) {
     const url = this._baseUrl + this._userInfoUrl;
 
-
     return fetch(url, {
       method: "PATCH",
       headers: this._headers,
@@ -50,6 +48,24 @@ export default class Api {
       .then((res) => {
         if (res.ok) return res.json();
         throw new Error(`Can't get user info from the server`);
+      })
+      .catch((err) => console.error(err));
+  }
+
+  addNewCard({ name, link }) {
+    const url = this._baseUrl + this._cardsUrl;
+
+    return fetch(url, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error(`Can't send new card to the server`);
       })
       .catch((err) => console.error(err));
   }

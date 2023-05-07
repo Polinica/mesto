@@ -20,6 +20,7 @@ import {
   newCardPopupSelector,
   imagePopupSelector,
   apiConfig,
+  confirmationPopupSelector,
 } from "../utils/constants.js";
 //import initialCards from "../utils/initialCards.js";
 import Card from "../components/Card.js";
@@ -27,6 +28,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
 import "./index.css"; // импорт css-стилей для сборки в Webpack
 import Api from "../components/Api.js";
@@ -48,7 +50,12 @@ function validateForms(formClasses) {
 const cards = {};
 
 function createCard(data) {
-  const card = new Card(data, cardTemplateSelector, handleCardClick);
+  const card = new Card(
+    data,
+    cardTemplateSelector,
+    handleCardClick,
+    handleDeleteCard
+  );
   cards[data._id] = card;
   return card.generateCard();
 }
@@ -57,6 +64,11 @@ function createCard(data) {
 
 function handleCardClick(imageLink, text) {
   imagePopup.open(imageLink, text);
+}
+
+function handleDeleteCard(cardElement) {
+  popupWithConfirmation.setTargetElement(cardElement);
+  popupWithConfirmation.open();
 }
 
 // Инициализация классов
@@ -103,9 +115,11 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
 
 // Инициализация Popup с добавлением новой карточки
 const newCardPopup = new PopupWithForm(newCardPopupSelector, (data) => {
-  cardsSection.addItem(createCard(data));
-  newCardPopup.close();
-  formValidators[newCardForm.getAttribute("name")].disableButtonState();
+  api.addNewCard(data).then((res) => {
+    cardsSection.addItem(createCard(data), true);
+    newCardPopup.close();
+    formValidators[newCardForm.getAttribute("name")].disableButtonState();
+  });
 });
 
 // Инициализация Popup с увеличенным изображением
@@ -113,6 +127,16 @@ const imagePopup = new PopupWithImage(imagePopupSelector);
 
 // Установка слушателей событий
 profileEditPopup.setEventListeners();
+
+const popupWithConfirmation = new PopupWithConfirmation(
+  confirmationPopupSelector,
+  (cardElement) => {
+    cardElement.remove();
+    popupWithConfirmation.close();
+  }
+);
+
+popupWithConfirmation.setEventListeners();
 
 /** Обработчки событий */
 
