@@ -91,16 +91,14 @@ api.getInitialCards().then((res) => {
   });
 });
 
-// const setDisabledOnSubmitButton = (evt) => {
-//   const submitButtonElement = evt.target.querySelector(".popup__save-button");
-//   submitButtonElement.classList.add("popup__save-button_disabled");
-//   submitButtonElement.disabled = true;
-// };
-
 // Инициализация Popup с редактированием информации о пользователе
 const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
-  userInfo.setUserInfo(data);
-  profileEditPopup.close();
+  api.setUserInfo(data).then((res) => {
+    userInfo.fill(res);
+    userInfo.renderName();
+    userInfo.renderJob();
+    profileEditPopup.close();
+  });
 });
 
 // Инициализация Popup с добавлением новой карточки
@@ -117,13 +115,6 @@ const imagePopup = new PopupWithImage(imagePopupSelector);
 profileEditPopup.setEventListeners();
 
 /** Обработчки событий */
-// profileEditButton.addEventListener("click", function () {
-//   ({ name: profileNameInput.value, job: profileJobInput.value } =
-//     userInfo.getUserInfo());
-//   profileNameInput.dispatchEvent(new Event("input"));
-//   profileJobInput.dispatchEvent(new Event("input"));
-//   profileEditPopup.open();
-// });
 
 profileEditButton.addEventListener("click", function () {
   ({ name: profileNameInput.value, job: profileJobInput.value } =
@@ -144,7 +135,7 @@ newCardButton.addEventListener("click", function () {
 imagePopup.setEventListeners();
 
 // Вызов функций и методов при загрузке страницы
-cardsSection.renderItems();
+//cardsSection.renderItems();
 
 /** Запустить валидацию форм на странице */
 validateForms({
