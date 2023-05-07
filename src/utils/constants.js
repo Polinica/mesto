@@ -14,6 +14,7 @@ export const inputErrorClass = "popup__input_type_error";
 export const errorClass = "popup__input-error_active";
 
 /** Элементы страницы */ // Редаткирование информации о пользователе
+export const profileAvatar = document.querySelector(".profile__avatar-image");
 export const profileName = document.querySelector(".profile__name");
 export const profileJob = document.querySelector(".profile__job");
 export const profileEditButton = document.querySelector(
@@ -48,13 +49,14 @@ export const newCardForm = newCardPopupElement.querySelector(formSelector);
 
 // Попап с увеличенным изображением
 export const imagePopupSelector = ".popup_type_image";
-// export const imagePopupFigure = imagePopup.querySelector(".popup__image");
-// export const imagePopupCaption = imagePopup.querySelector(
-//   ".popup__image-caption"
-// );
 
-// export const popupCloseButtons = document.querySelectorAll(
-//   ".popup__cancel-button"
-// );
-
-// export const popups = document.querySelectorAll(".popup");
+// Настройки для подключения к серверу
+const token = "e15cec99-d6b9-42d3-8bac-fea59fe72095";
+const cohortId = "cohort-65";
+export const apiConfig = {
+  baseUrl: `https://mesto.nomoreparties.co/v1/${cohortId}`,
+  headers: {
+    authorization: token,
+    "Content-Type": "application/json",
+  },
+};
