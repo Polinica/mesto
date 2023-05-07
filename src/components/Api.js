@@ -12,6 +12,7 @@ export default class Api {
     return fetch(url, {
       method: "GET",
       headers: this._headers,
+      
     })
       .then((res) => {
         if (res.ok) return res.json();
@@ -36,7 +37,7 @@ export default class Api {
 
   setUserInfo({ name, job }) {
     const url = this._baseUrl + this._userInfoUrl;
-    
+
 
     return fetch(url, {
       method: "PATCH",
