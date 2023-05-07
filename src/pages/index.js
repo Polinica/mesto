@@ -8,6 +8,7 @@ import {
   inactiveButtonClass,
   inputErrorClass,
   errorClass,
+  profileAvatar,
   profileName,
   profileJob,
   profileEditButton,
@@ -20,7 +21,7 @@ import {
   imagePopupSelector,
   apiConfig,
 } from "../utils/constants.js";
-import initialCards from "../utils/initialCards.js";
+//import initialCards from "../utils/initialCards.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -44,8 +45,11 @@ function validateForms(formClasses) {
   });
 }
 
+const cards = {};
+
 function createCard(data) {
   const card = new Card(data, cardTemplateSelector, handleCardClick);
+  cards[data._id] = card;
   return card.generateCard();
 }
 
@@ -58,13 +62,34 @@ function handleCardClick(imageLink, text) {
 // Инициализация классов
 const api = new Api(apiConfig);
 
+// Инициализация UserInfo
+const userInfo = new UserInfo({
+  nameElement: profileName,
+  jobElement: profileJob,
+  avatarElement: profileAvatar,
+});
+
+api.getUserInfo().then((res) => {
+  userInfo.fill(res);
+  userInfo.renderName();
+  userInfo.renderJob();
+  userInfo.renderAvatar();
+});
+
 const cardsSection = new Section(
   {
-    items: initialCards,
+    items: [],
     renderer: createCard,
   },
   cardsSelector
 );
+
+api.getInitialCards().then((res) => {
+  res.forEach((data) => {
+    const card = createCard(data);
+    cardsSection.addItem(card);
+  });
+});
 
 // const setDisabledOnSubmitButton = (evt) => {
 //   const submitButtonElement = evt.target.querySelector(".popup__save-button");
@@ -87,12 +112,6 @@ const newCardPopup = new PopupWithForm(newCardPopupSelector, (data) => {
 
 // Инициализация Popup с увеличенным изображением
 const imagePopup = new PopupWithImage(imagePopupSelector);
-
-// Инициализация UserInfo
-const userInfo = new UserInfo({
-  nameElement: profileName,
-  jobElement: profileJob,
-});
 
 // Установка слушателей событий
 profileEditPopup.setEventListeners();
@@ -135,10 +154,4 @@ validateForms({
   inactiveButtonClass,
   inputErrorClass,
   errorClass,
-});
-
-api.getUserInfo().then((res) => {
-  userInfo.fill(res);
-  userInfo.renderName();
-  userInfo.renderJob();
 });

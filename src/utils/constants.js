@@ -14,6 +14,7 @@ export const inputErrorClass = "popup__input_type_error";
 export const errorClass = "popup__input-error_active";
 
 /** Элементы страницы */ // Редаткирование информации о пользователе
+export const profileAvatar = document.querySelector(".profile__avatar-image");
 export const profileName = document.querySelector(".profile__name");
 export const profileJob = document.querySelector(".profile__job");
 export const profileEditButton = document.querySelector(

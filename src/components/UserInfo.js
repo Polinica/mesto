@@ -6,9 +6,10 @@ export default class UserInfo {
    * nameElement - элемент с именем пользователя
    * jobElement - элемент с описанием деятельности пользователя
    */
-  constructor({ nameElement, jobElement }) {
+  constructor({ nameElement, jobElement, avatarElement }) {
     this._nameElement = nameElement;
     this._jobElement = jobElement;
+    this._avatarElement = avatarElement;
   }
 
   getUserInfo() {
@@ -22,7 +23,7 @@ export default class UserInfo {
     this._nameElement.textContent = name;
     this._jobElement.textContent = job;
   }
-  
+
   fill({ name, about, avatar, cohort, _id }) {
     this._name = name;
     this._job = about;
@@ -37,5 +38,9 @@ export default class UserInfo {
 
   renderJob() {
     this._jobElement.textContent = this._job;
+  }
+
+  renderAvatar() {
+    this._avatarElement.src = this._avatar;
   }
 }
