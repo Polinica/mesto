@@ -22,4 +22,20 @@ export default class UserInfo {
     this._nameElement.textContent = name;
     this._jobElement.textContent = job;
   }
+  
+  fill({ name, about, avatar, cohort, _id }) {
+    this._name = name;
+    this._job = about;
+    this._avatar = avatar;
+    this._cohort = cohort;
+    this._id = _id;
+  }
+
+  renderName() {
+    this._nameElement.textContent = this._name;
+  }
+
+  renderJob() {
+    this._jobElement.textContent = this._job;
+  }
 }

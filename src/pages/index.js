@@ -2,6 +2,12 @@
 import {
   cardsSelector,
   cardTemplateSelector,
+  formSelector,
+  inputSelector,
+  submitButtonSelector,
+  inactiveButtonClass,
+  inputErrorClass,
+  errorClass,
   profileName,
   profileJob,
   profileEditButton,
@@ -12,6 +18,7 @@ import {
   newCardForm,
   newCardPopupSelector,
   imagePopupSelector,
+  apiConfig,
 } from "../utils/constants.js";
 import initialCards from "../utils/initialCards.js";
 import Card from "../components/Card.js";
@@ -21,6 +28,21 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import "./index.css"; // импорт css-стилей для сборки в Webpack
+import Api from "../components/Api.js";
+
+const formValidators = {}; // Экземпляры класса FormValidator, чтобы снаружи обращаться к их методам
+
+/** Функция запускает валидацию всех форм на странице */
+function validateForms(formClasses) {
+  const formElements = Array.from(
+    document.querySelectorAll(formClasses.formSelector)
+  );
+  formElements.forEach((formElement) => {
+    const form = new FormValidator(formClasses, formElement);
+    formValidators[formElement.getAttribute("name")] = form;
+    form.enableValidation();
+  });
+}
 
 function createCard(data) {
   const card = new Card(data, cardTemplateSelector, handleCardClick);
@@ -34,6 +56,8 @@ function handleCardClick(imageLink, text) {
 }
 
 // Инициализация классов
+const api = new Api(apiConfig);
+
 const cardsSection = new Section(
   {
     items: initialCards,
@@ -41,7 +65,6 @@ const cardsSection = new Section(
   },
   cardsSelector
 );
-cardsSection.renderItems();
 
 // const setDisabledOnSubmitButton = (evt) => {
 //   const submitButtonElement = evt.target.querySelector(".popup__save-button");
@@ -54,6 +77,24 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
   userInfo.setUserInfo(data);
   profileEditPopup.close();
 });
+
+// Инициализация Popup с добавлением новой карточки
+const newCardPopup = new PopupWithForm(newCardPopupSelector, (data) => {
+  cardsSection.addItem(createCard(data));
+  newCardPopup.close();
+  formValidators[newCardForm.getAttribute("name")].disableButtonState();
+});
+
+// Инициализация Popup с увеличенным изображением
+const imagePopup = new PopupWithImage(imagePopupSelector);
+
+// Инициализация UserInfo
+const userInfo = new UserInfo({
+  nameElement: profileName,
+  jobElement: profileJob,
+});
+
+// Установка слушателей событий
 profileEditPopup.setEventListeners();
 
 /** Обработчки событий */
@@ -72,12 +113,6 @@ profileEditButton.addEventListener("click", function () {
   profileEditPopup.open();
 });
 
-// Инициализация Popup с добавлением новой карточки
-const newCardPopup = new PopupWithForm(newCardPopupSelector, (data) => {
-  cardsSection.addItem(createCard(data));
-  newCardPopup.close();
-  formValidators[newCardForm.getAttribute("name")].disableButtonState();
-});
 newCardPopup.setEventListeners();
 
 newCardButton.addEventListener("click", function () {
@@ -87,37 +122,23 @@ newCardButton.addEventListener("click", function () {
 // const popupImage = new PopupWithImage(".popup_type_image");
 // popupImage.setEventListeners();
 
-// Инициализация Popup с увеличенным изображением
-const imagePopup = new PopupWithImage(imagePopupSelector);
-
 imagePopup.setEventListeners();
 
-const formValidators = {}; // Экземпляры класса FormValidator, чтобы снаружи обращаться к их методам
-
-/** Функция запускает валидацию всех форм на странице */
-function validateForms(formClasses) {
-  const formElements = Array.from(
-    document.querySelectorAll(formClasses.formSelector)
-  );
-  formElements.forEach((formElement) => {
-    const form = new FormValidator(formClasses, formElement);
-    formValidators[formElement.getAttribute("name")] = form;
-    form.enableValidation();
-  });
-}
+// Вызов функций и методов при загрузке страницы
+cardsSection.renderItems();
 
 /** Запустить валидацию форм на странице */
 validateForms({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save-button",
-  inactiveButtonClass: "popup__save-button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_active",
+  formSelector,
+  inputSelector,
+  submitButtonSelector,
+  inactiveButtonClass,
+  inputErrorClass,
+  errorClass,
 });
 
-// Инициализация UserInfo
-const userInfo = new UserInfo({
-  nameElement: profileName,
-  jobElement: profileJob,
+api.getUserInfo().then((res) => {
+  userInfo.fill(res);
+  userInfo.renderName();
+  userInfo.renderJob();
 });
