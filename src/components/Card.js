@@ -11,12 +11,20 @@ export default class Card {
   constructor(
     { name, link, likes, owner, createdAt, _id },
     templateSelector,
-    handleCardClick
+    handleCardClick,
+    handleDeleteCard,
+    userId
   ) {
     this._name = name;
     this._link = link;
+    this._likes = likes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCard = handleDeleteCard;
+    this._owner = owner;
+    this._createdAt = createdAt;
+    this._id = _id;
+    this._userId = userId;
   }
 
   _getTemplate() {
@@ -36,6 +44,11 @@ export default class Card {
     image.src = this._link;
     image.alt = this._name;
     this._element.querySelector(".card__title").textContent = this._name;
+    this._element.querySelector(".card__like-count").textContent =
+      this._likes.length;
+    if (this._owner._id !== this._userId) {
+      this._element.querySelector(".card__delete-button").remove();
+    }
 
     // Обработчики нажатий
     this._setEventlisteners();
@@ -47,14 +60,19 @@ export default class Card {
     this._buttonLike.addEventListener("click", (evt) => {
       this._likeCard();
     });
-    this._element
-      .querySelector(".card__delete-button")
-      .addEventListener("click", () => this._deleteCard());
+    // this._element
+    //   .querySelector(".card__delete-button")
+    //   .addEventListener("click", () => this._deleteCard());
     this._element
       .querySelector(".card__image")
       .addEventListener("click", () =>
         this._handleCardClick(this._link, this._name)
       );
+    if (this._element.querySelector(".card__delete-button")) {
+      this._element
+        .querySelector(".card__delete-button")
+        .addEventListener("click", () => this._deleteCard());
+    }
   }
 
   _likeCard(evt) {
@@ -62,7 +80,6 @@ export default class Card {
   }
 
   _deleteCard() {
-    this._element.remove();
-    this._element = null;
+    this._handleDeleteCard(this._element);
   }
 }
