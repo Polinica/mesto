@@ -33,9 +33,10 @@ export default class Api {
       })
       .catch((err) => console.error(err));
   }
-  
+
   setUserInfo({ name, job }) {
     const url = this._baseUrl + this._userInfoUrl;
+    
 
     return fetch(url, {
       method: "PATCH",
