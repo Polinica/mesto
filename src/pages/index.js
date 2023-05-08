@@ -54,7 +54,9 @@ function createCard(data) {
     data,
     cardTemplateSelector,
     handleCardClick,
-    handleDeleteCard
+    handleDeleteCard,
+    handleLikeCard,
+    userInfo.id
   );
   cards[data._id] = card;
   return card.generateCard();
@@ -66,9 +68,15 @@ function handleCardClick(imageLink, text) {
   imagePopup.open(imageLink, text);
 }
 
-function handleDeleteCard(cardElement) {
-  popupWithConfirmation.setTargetElement(cardElement);
+function handleDeleteCard(cardId) {
+  popupWithConfirmation.setTarget(cardId);
   popupWithConfirmation.open();
+}
+
+function handleLikeCard(cardId, isLiked) {
+  return api.toggleLike(cardId, isLiked).then((likes) => {
+    cards[cardId].setLikes(likes);
+  });
 }
 
 // Инициализация классов
@@ -116,7 +124,7 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
 // Инициализация Popup с добавлением новой карточки
 const newCardPopup = new PopupWithForm(newCardPopupSelector, (data) => {
   api.addNewCard(data).then((res) => {
-    cardsSection.addItem(createCard(data), true);
+    cardsSection.addItem(createCard(res), true);
     newCardPopup.close();
     formValidators[newCardForm.getAttribute("name")].disableButtonState();
   });
@@ -130,9 +138,11 @@ profileEditPopup.setEventListeners();
 
 const popupWithConfirmation = new PopupWithConfirmation(
   confirmationPopupSelector,
-  (cardElement) => {
-    cardElement.remove();
-    popupWithConfirmation.close();
+  (cardId) => {
+    api.deleteCard(cardId).then(() => {
+      cards[cardId].delete();
+      popupWithConfirmation.close();
+    });
   }
 );
 

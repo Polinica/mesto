@@ -69,4 +69,77 @@ export default class Api {
       })
       .catch((err) => console.error(err));
   }
+
+  deleteCard(cardId) {
+    const url = this._baseUrl + this._cardsUrl + "/" + cardId;
+
+    return fetch(url, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then((res) => {
+        if (res.ok) return Promise.resolve();
+        throw new Error(`Can't delete card from the server`);
+      })
+      .catch((err) => console.error(err));
+  }
+
+  _setLike(cardId) {
+    const url = this._baseUrl + this._cardsUrl + "/" + cardId + "/likes";
+
+    return fetch(url, {
+      method: "PUT",
+      headers: this._headers,
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error(`Can't send like to the server`);
+      })
+      .then((res) => {
+        return res.likes;
+      })
+      .catch((err) => console.error(err));
+  }
+
+  _deleteLike(cardId) {
+    const url = this._baseUrl + this._cardsUrl + "/" + cardId + "/likes";
+
+    return fetch(url, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error(`Can't delete like from the server`);
+      })
+      .then((res) => {
+        return res.likes;
+      })
+      .catch((err) => console.error(err));
+  }
+
+  toggleLike(cardId, isLiked) {
+    if (isLiked) {
+      return this._deleteLike(cardId);
+    } else {
+      return this._setLike(cardId);
+    }
+  }
+
+  changeAvatar(link) {
+    const url = this._baseUrl + this._userInfoUrl + "/avatar";
+
+    return fetch(url, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error(`Can't send avatar to the server`);
+      })
+      .catch((err) => console.error(err));
+  }
 }
