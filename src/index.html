@@ -23,11 +23,18 @@
       <main>
         <!-- Profile -->
         <section class="profile content__element">
-          <img
-            src="#"
-            alt="Фотография пользователя"
-            class="profile__avatar-image"
-          />
+          <div class="profile__avatar">
+            <img
+              src="#"
+              alt="Фотография пользователя"
+              class="profile__avatar-image"
+            />
+            <button
+              class="profile__avatar-button"
+              type="button"
+              aria-label="Обновить аватар"
+            ></button>
+          </div>
           <div class="profile__info">
             <div class="profile__name-block">
               <h1 class="profile__name"></h1>
@@ -116,6 +123,32 @@
                 class="popup__input-error popup__input-error_type_job job-input-error"
                 >Вы пропустили это поле.</span
               >
+            </label>
+            <button class="popup__save-button" type="submit">Сохранить</button>
+          </form>
+          <button
+            class="popup__cancel-button"
+            type="button"
+            aria-label="Закрыть окно"
+          ></button>
+        </div>
+      </div>
+
+      <!-- Popup: обновление аватара -->
+      <div class="popup popup_type_change-avatar">
+        <div class="popup__container content__element">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form class="popup__form" name="avatarChangePopupForm" novalidate>
+            <label class="popup__field">
+              <input
+                type="url"
+                class="popup__input popup__input_type_link"
+                id="link-input"
+                placeholder="Ссылка на картинку"
+                name="link"
+                required
+              />
+              <span class="popup__input-error link-input-error"></span>
             </label>
             <button class="popup__save-button" type="submit">Сохранить</button>
           </form>

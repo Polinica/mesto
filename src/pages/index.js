@@ -15,6 +15,8 @@ import {
   profileNameInput,
   profileJobInput,
   profileEditPopupSelector,
+  avatarChangeButton,
+  avatarChangePopupSelector,
   newCardButton,
   newCardForm,
   newCardPopupSelector,
@@ -54,7 +56,9 @@ function createCard(data) {
     data,
     cardTemplateSelector,
     handleCardClick,
-    handleDeleteCard
+    handleDeleteCard,
+    handleLikeCard,
+    userInfo.id
   );
   cards[data._id] = card;
   return card.generateCard();
@@ -66,9 +70,15 @@ function handleCardClick(imageLink, text) {
   imagePopup.open(imageLink, text);
 }
 
-function handleDeleteCard(cardElement) {
-  popupWithConfirmation.setTargetElement(cardElement);
+function handleDeleteCard(cardId) {
+  popupWithConfirmation.setTarget(cardId);
   popupWithConfirmation.open();
+}
+
+function handleLikeCard(cardId, isLiked) {
+  return api.toggleLike(cardId, isLiked).then((likes) => {
+    cards[cardId].setLikes(likes);
+  });
 }
 
 // Инициализация классов
@@ -105,7 +115,7 @@ api.getInitialCards().then((res) => {
 
 // Инициализация Popup с редактированием информации о пользователе
 const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
-  api.setUserInfo(data).then((res) => {
+  return api.setUserInfo(data).then((res) => {
     userInfo.fill(res);
     userInfo.renderName();
     userInfo.renderJob();
@@ -113,10 +123,23 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
   });
 });
 
+const avatarChangePopup = new PopupWithForm(
+  avatarChangePopupSelector,
+  (data) => {
+    return api.changeAvatar(data.link).then((res) => {
+      userInfo.fill(res);
+      userInfo.renderAvatar();
+      avatarChangePopup.close();
+    });
+  }
+);
+
+avatarChangePopup.setEventListeners();
+
 // Инициализация Popup с добавлением новой карточки
 const newCardPopup = new PopupWithForm(newCardPopupSelector, (data) => {
-  api.addNewCard(data).then((res) => {
-    cardsSection.addItem(createCard(data), true);
+  return api.addNewCard(data).then((res) => {
+    cardsSection.addItem(createCard(res), true);
     newCardPopup.close();
     formValidators[newCardForm.getAttribute("name")].disableButtonState();
   });
@@ -130,9 +153,11 @@ profileEditPopup.setEventListeners();
 
 const popupWithConfirmation = new PopupWithConfirmation(
   confirmationPopupSelector,
-  (cardElement) => {
-    cardElement.remove();
-    popupWithConfirmation.close();
+  (cardId) => {
+    api.deleteCard(cardId).then(() => {
+      cards[cardId].delete();
+      popupWithConfirmation.close();
+    });
   }
 );
 
@@ -145,6 +170,10 @@ profileEditButton.addEventListener("click", function () {
     userInfo.getUserInfo());
   profileEditPopup.setInputValues(userInfo.getUserInfo());
   profileEditPopup.open();
+});
+
+avatarChangeButton.addEventListener("click", () => {
+  avatarChangePopup.open();
 });
 
 newCardPopup.setEventListeners();

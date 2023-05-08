@@ -33,6 +33,12 @@ export const profileJobInput = profileEditPopupElement.querySelector(
   ".popup__input_type_job"
 );
 
+// Попап с обновлением аватара
+export const avatarChangeButton = document.querySelector(
+  ".profile__avatar-button"
+);
+export const avatarChangePopupSelector = ".popup_type_change-avatar";
+
 // Добавление новых карточек
 export const newCardPopupSelector = ".popup_type_add-card";
 export const newCardPopupElement = document.querySelector(newCardPopupSelector);
@@ -51,7 +57,7 @@ export const newCardForm = newCardPopupElement.querySelector(formSelector);
 export const imagePopupSelector = ".popup_type_image";
 
 // Попап с подтверждением
-export const confirmationPopupSelector = '.popup_type_confirm';
+export const confirmationPopupSelector = ".popup_type_confirm";
 
 // Настройки для подключения к серверу
 const token = "e15cec99-d6b9-42d3-8bac-fea59fe72095";
