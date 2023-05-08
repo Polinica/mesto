@@ -15,6 +15,8 @@ import {
   profileNameInput,
   profileJobInput,
   profileEditPopupSelector,
+  avatarChangeButton,
+  avatarChangePopupSelector,
   newCardButton,
   newCardForm,
   newCardPopupSelector,
@@ -113,7 +115,7 @@ api.getInitialCards().then((res) => {
 
 // Инициализация Popup с редактированием информации о пользователе
 const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
-  api.setUserInfo(data).then((res) => {
+  return api.setUserInfo(data).then((res) => {
     userInfo.fill(res);
     userInfo.renderName();
     userInfo.renderJob();
@@ -121,9 +123,22 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, (data) => {
   });
 });
 
+const avatarChangePopup = new PopupWithForm(
+  avatarChangePopupSelector,
+  (data) => {
+    return api.changeAvatar(data.link).then((res) => {
+      userInfo.fill(res);
+      userInfo.renderAvatar();
+      avatarChangePopup.close();
+    });
+  }
+);
+
+avatarChangePopup.setEventListeners();
+
 // Инициализация Popup с добавлением новой карточки
 const newCardPopup = new PopupWithForm(newCardPopupSelector, (data) => {
-  api.addNewCard(data).then((res) => {
+  return api.addNewCard(data).then((res) => {
     cardsSection.addItem(createCard(res), true);
     newCardPopup.close();
     formValidators[newCardForm.getAttribute("name")].disableButtonState();
@@ -155,6 +170,10 @@ profileEditButton.addEventListener("click", function () {
     userInfo.getUserInfo());
   profileEditPopup.setInputValues(userInfo.getUserInfo());
   profileEditPopup.open();
+});
+
+avatarChangeButton.addEventListener("click", () => {
+  avatarChangePopup.open();
 });
 
 newCardPopup.setEventListeners();
