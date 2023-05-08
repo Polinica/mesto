@@ -51,7 +51,7 @@ export const newCardForm = newCardPopupElement.querySelector(formSelector);
 export const imagePopupSelector = ".popup_type_image";
 
 // Попап с подтверждением
-export const confirmationPopupSelector = '.popup_type_confirm';
+export const confirmationPopupSelector = ".popup_type_confirm";
 
 // Настройки для подключения к серверу
 const token = "e15cec99-d6b9-42d3-8bac-fea59fe72095";
