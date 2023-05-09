@@ -157,7 +157,8 @@ const popupWithConfirmation = new PopupWithConfirmation(
     api.deleteCard(cardId).then(() => {
       cards[cardId].delete();
       popupWithConfirmation.close();
-    });
+    })
+    .catch(err => console.error(err));
   }
 );
 
