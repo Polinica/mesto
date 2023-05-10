@@ -51,6 +51,8 @@ function validateForms(formClasses) {
 
 const cards = {};
 
+
+
 function createCard(data) {
   const card = new Card(
     data,
