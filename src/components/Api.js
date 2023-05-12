@@ -14,6 +14,17 @@ export default class Api {
     // this._cardsUrl = "/cards";
   }
 
+  //* Проверка статуса запроса
+  _requestResult(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(
+        `Что-то пошло не так: Ошибка ${res.status} - ${res.statusText}`
+      );
+    }
+  }
+
   /**
    * Получает данные текущего пользователя
    * @returns {Promise} Промис с ответом сервера: объект текущего пользователя
@@ -24,12 +35,7 @@ export default class Api {
     return fetch(url, {
       method: "GET",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) return res.json();
-      return res.json().then((res) => {
-        throw new Error(res.message);
-      });
-    });
+    }).then((res) => this._requestResult(res));
   }
 
   /**
@@ -49,12 +55,7 @@ export default class Api {
         name,
         about: job,
       }),
-    }).then((res) => {
-      if (res.ok) return res.json();
-      return res.json().then((res) => {
-        throw new Error(res.message);
-      });
-    });
+    }).then((res) => this._requestResult(res));
   }
 
   /**
@@ -71,12 +72,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: link,
       }),
-    }).then((res) => {
-      if (res.ok) return res.json();
-      return res.json().then((res) => {
-        throw new Error(res.message);
-      });
-    });
+    }).then((res) => this._requestResult(res));
   }
 
   /**
@@ -89,12 +85,7 @@ export default class Api {
     return fetch(url, {
       method: "GET",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) return res.json();
-      return res.json().then((res) => {
-        throw new Error(res.message);
-      });
-    });
+    }).then((res) => this._requestResult(res));
   }
 
   /**
@@ -114,12 +105,7 @@ export default class Api {
         name,
         link,
       }),
-    }).then((res) => {
-      if (res.ok) return res.json();
-      return res.json().then((res) => {
-        throw new Error(res.message);
-      });
-    });
+    }).then((res) => this._requestResult(res));
   }
 
   /**
@@ -133,12 +119,7 @@ export default class Api {
     return fetch(url, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) return Promise.resolve();
-      return res.json().then((res) => {
-        throw new Error(res.message);
-      });
-    });
+    }).then((res) => this._requestResult(res));
   }
 
   /**
@@ -153,12 +134,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return res.json().then((res) => {
-          throw new Error(res.message);
-        });
-      })
+      .then((res) => this._requestResult(res))
       .then((res) => {
         return res.likes;
       });
@@ -175,12 +151,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return res.json().then((res) => {
-          throw new Error(res.message);
-        });
-      })
+      .then((res) => this._requestResult(res))
       .then((res) => {
         return res.likes;
       });
