@@ -133,11 +133,7 @@ export default class Api {
     return fetch(url, {
       method: "PUT",
       headers: this._headers,
-    })
-      .then((res) => this._requestResult(res))
-      .then((res) => {
-        return res.likes;
-      });
+    }).then((res) => this._requestResult(res));
   }
   /**
    * Удаляет лайк с карточки
@@ -150,11 +146,7 @@ export default class Api {
     return fetch(url, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => this._requestResult(res))
-      .then((res) => {
-        return res.likes;
-      });
+    }).then((res) => this._requestResult(res));
   }
 
   /**
@@ -165,9 +157,13 @@ export default class Api {
    */
   toggleLike(cardId, isLiked) {
     if (isLiked) {
-      return this._deleteLike(cardId);
+      return this._deleteLike(cardId).then((res) => {
+        return res.likes;
+      });
     } else {
-      return this._setLike(cardId);
+      return this._setLike(cardId).then((res) => {
+        return res.likes;
+      });
     }
   }
 }

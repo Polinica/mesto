@@ -116,9 +116,10 @@ function handleLikeCard(cardId, isLiked) {
 }
 
 /**
- * Выключает кнопку сабмита при вызове из экземпляра попапа с формой
+ * Выполняет сброс формы при открытии попапа с формой
  */
-function handleDisableSubmitButton() {
+function handleOpenForm() {
+  formValidators[this.formName].hideErrors();
   formValidators[this.formName].disableButtonState();
 }
 
@@ -154,7 +155,7 @@ const profileEditPopup = new PopupWithForm(
         profileEditPopup.unblockSubmitButton();
       });
   },
-  handleDisableSubmitButton
+  handleOpenForm
 );
 
 const avatarChangePopup = new PopupWithForm(
@@ -174,7 +175,7 @@ const avatarChangePopup = new PopupWithForm(
         avatarChangePopup.unblockSubmitButton();
       });
   },
-  handleDisableSubmitButton
+  handleOpenForm
 );
 
 // avatarChangePopup.setEventListeners();
@@ -197,7 +198,7 @@ const newCardPopup = new PopupWithForm(
         newCardPopup.unblockSubmitButton();
       });
   },
-  handleDisableSubmitButton
+  handleOpenForm
 );
 
 // Инициализация Popup с увеличенным изображением
