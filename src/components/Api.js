@@ -127,7 +127,7 @@ export default class Api {
    * @param {string} cardId - ID карточки
    * @returns {Promise} Промис с массивом новых лайков карточки
    */
-  _setLike(cardId) {
+  setLike(cardId) {
     const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
     return fetch(url, {
@@ -140,7 +140,7 @@ export default class Api {
    * @param {string} cardId - ID карточки
    * @returns {Promise} Промис с массивом новых лайков карточки
    */
-  _deleteLike(cardId) {
+  deleteLike(cardId) {
     const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
     return fetch(url, {
@@ -157,11 +157,11 @@ export default class Api {
    */
   toggleLike(cardId, isLiked) {
     if (isLiked) {
-      return this._deleteLike(cardId).then((res) => {
+      return this.deleteLike(cardId).then((res) => {
         return res.likes;
       });
     } else {
-      return this._setLike(cardId).then((res) => {
+      return this.setLike(cardId).then((res) => {
         return res.likes;
       });
     }

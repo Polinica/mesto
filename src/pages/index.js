@@ -29,6 +29,9 @@ import UserInfo from "../components/UserInfo.js";
 import "./index.css"; // импорт css-стилей для сборки в Webpack
 import Api from "../components/Api.js";
 
+//* Переменные для id пользователя и лайков
+let addCardLike, deleteCardLike;
+
 /**
  * Переменные страницы
  */
@@ -72,7 +75,13 @@ function createCard(data) {
     handleCardClick,
     handleDeleteCard,
     handleLikeCard,
-    userInfo.id
+    userInfo.id,
+    (addCardLike = (data) => {
+      return api.setLike(data);
+    }),
+    (deleteCardLike = (data) => {
+      return api.deleteLike(data);
+    })
   );
   cards[data._id] = card;
   return card.generateCard();

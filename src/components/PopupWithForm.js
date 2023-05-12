@@ -56,8 +56,9 @@ export default class PopupWithForm extends Popup {
    * Выполняет необхоимые действия при сабмите формы
    */
   _submit() {
+    // evt.preventDefault();
     // const button = this._form.querySelector(".popup__save-button");
-    this._handleSubmit(this._getInputValues());
+    this._handleSubmit(this._getInputValues(), this._submitButton);
   }
   /**
    * Блокирует кнопку отправки во время выполнения запроса
