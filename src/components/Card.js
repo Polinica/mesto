@@ -18,6 +18,8 @@ export default class Card {
    * @param {function} handleDeleteCard - Функция-обработчик для кнопки удаления карточки
    *
    * @param {function} handleLikeCard - Функция-обработчик для лайка карточки
+   *
+   * @param {string} userId - ID текущего пользователя
    */
   constructor(
     { name, link, likes, owner, createdAt, _id },
@@ -61,7 +63,7 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._buttonLike = this._element.querySelector(".card__like-button");
+    this._likeButton = this._element.querySelector(".card__like-button");
 
     // Заполнение содержимого
     const image = this._element.querySelector(".card__image");
@@ -85,7 +87,7 @@ export default class Card {
   _setEventlisteners() {
     this._element
       .querySelector(".card__like-button")
-      .addEventListener("click", (event) => this._likeCard(event));
+      .addEventListener("click", () => this._likeCard());
 
     // this._buttonLike.addEventListener("click", (evt) => {
     //   this._likeCard();
@@ -109,12 +111,22 @@ export default class Card {
    * Обрабатывает лайк карточки
    * @param {object} event - Событие клика
    */
-  _likeCard(event) {
-    event.target.disabled = true;
+  _likeCard() {
+    this._handleLikeCard(this._id, this._isLiked);
+  }
 
-    this._handleLikeCard(this._id, this._isLiked).then(() => {
-      event.target.disabled = false;
-    });
+  /**
+   * Блокирует кнопку лайка
+   */
+  blockLikeButton() {
+    this._likeButton.disabled = true;
+  }
+
+  /**
+   * Разблокирует кнопку лайка
+   */
+  unblockLikeButton() {
+    this._likeButton.disabled = false;
   }
 
   /**

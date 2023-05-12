@@ -6,17 +6,31 @@ export const cardsSelector = ".cards";
 export const cardTemplateSelector = "#card";
 
 // Общие элементы форм
-export const formSelector = ".popup__form";
-export const inputSelector = ".popup__input";
-export const submitButtonSelector = ".popup__save-button";
-export const inactiveButtonClass = "popup__save-button_disabled";
-export const inputErrorClass = "popup__input_type_error";
-export const errorClass = "popup__input-error_active";
+const formSelector = ".popup__form";
+const inputSelector = ".popup__input";
+const submitButtonSelector = ".popup__save-button";
+const inactiveButtonClass = "popup__save-button_disabled";
+const inputErrorClass = "popup__input_type_error";
+const errorClass = "popup__input-error_active";
+export const formSelectors = {
+  formSelector,
+  inputSelector,
+  submitButtonSelector,
+  inactiveButtonClass,
+  inputErrorClass,
+  errorClass,
+};
 
 /** Элементы страницы */ // Редаткирование информации о пользователе
-export const profileAvatar = document.querySelector(".profile__avatar-image");
-export const profileName = document.querySelector(".profile__name");
-export const profileJob = document.querySelector(".profile__job");
+const profileAvatar = document.querySelector(".profile__avatar-image");
+const profileName = document.querySelector(".profile__name");
+const profileJob = document.querySelector(".profile__job");
+export const profileElements = {
+  name: profileName,
+  job: profileJob,
+  avatar: profileAvatar,
+};
+
 export const profileEditButton = document.querySelector(
   ".profile__button_type_edit"
 );
@@ -58,14 +72,3 @@ export const imagePopupSelector = ".popup_type_image";
 
 // Попап с подтверждением
 export const confirmationPopupSelector = ".popup_type_confirm";
-
-// Настройки для подключения к серверу
-const token = "e15cec99-d6b9-42d3-8bac-fea59fe72095";
-const cohortId = "cohort-65";
-export const apiConfig = {
-  baseUrl: `https://mesto.nomoreparties.co/v1/${cohortId}`,
-  headers: {
-    authorization: token,
-    "Content-Type": "application/json",
-  },
-};
